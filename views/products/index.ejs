@@ -1,0 +1,73 @@
+<% layout('layouts/boilerplate')%>
+
+    <div class="row">
+        <div class="col-8 offset-2">
+            <h1 class="text-primary mb-3">Danh sách sản phẩm</h1>
+            <a href="/add" class="btn btn-success mb-3">Thêm sản phẩm</a>
+            <p>Chọn một sản phẩm cụ thể để xem chi tiết</p>
+            <div>
+                <table class="table table-striped">
+                    <thead>
+
+                        <tr>
+                            <th scope="col">STT</th>
+                            <th scope="col">Họ và tên</th>
+                            <th scope="col">Tuổi</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Giới tính</th>
+                            <th scope="col">Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% for(let [k,p] of user.entries()) { %>
+                            <tr>
+                                <th scope="row">
+                                    <%= k +1 %>
+                                </th>
+                                <td>
+                                    <%= p.name %>
+                                </td>
+                                <td>
+                                    <%= p.age %>
+                                </td>
+                                <td>
+                                    <%= p.email %>
+                                </td>
+                                <td>
+                                    <%= p.gender %>
+                                </td>
+                                <td>
+                                    <p><a href="/update/<%= p.id %> " type="button" class="btn btn-outline-primary btn-sm">Chỉnh sửa</a> | <a type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete">Xóa</a></p>
+                                </td>
+                            </tr>
+                            <!--  Delete Modal -->
+                            <div class="modal fade" id="delete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="deleteLabel">Thông báo</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Bạn có chắc chắn rằng muốn xóa người dùng này không?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                                            <a href="/delete/<%= p.id %>" type="button" class="btn btn-primary">Đồng ý</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <% } %>
+
+                    </tbody>
+
+
+                </table>
+
+
+            </div>
+
+        </div>
+
+    </div>
